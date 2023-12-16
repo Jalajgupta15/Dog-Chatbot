@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dog Breed Chatbot</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        #chat-container {
+            border: 1px solid #ccc;
+            padding: 20px;
+            max-width: 400px;
+            margin: 0 auto;
+        }
+        #chat-log {
+            margin-bottom: 10px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            max-height: 200px;
+            overflow-y: auto;
+        }
+        #user-input {
+            width: 100%;
+            padding: 5px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Dog Breed Chatbot</h1>
+    <div id="chat-container">
+        <div id="chat-log"></div>
+        <input type="text" id="user-input" placeholder="Type your message..." onkeydown="sendMessage(event)">
+    </div>
+
+    <script>
+        function sendMessage(event) {
+            if (event.key === "Enter") {
+                const userInput = document.getElementById('user-input').value;
+                appendMessage('user', userInput);
+                document.getElementById('user-input').value = '';
+
+                fetch('/chat', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded',
+                    },
+                    body: `user_message=${encodeURIComponent(userInput)}`,
+                })
+                .then(response => response.json())
+                .then(data => {
+                    const botResponse = data.bot_response;
+                    appendMessage('bot', botResponse);
+                });
+            }
+        }
+
+        function appendMessage(sender, message) {
+            const chatLog = document.getElementById('chat-log');
+            const messageElement = document.createElement('div');
+            messageElement.classList.add(sender === 'user' ? 'user-message' : 'bot-message');
+            messageElement.innerText = `${sender === 'user' ? 'You:' : 'Bot:'} ${message}`;
+            chatLog.appendChild(messageElement);
+            chatLog.scrollTop = chatLog.scrollHeight;
+        }
+    </script>
+</body>
+</html>
