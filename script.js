@@ -10,23 +10,29 @@ function getBreedInfo() {
 
             if (data.length > 0) {
                 const breed = data[0];
-                const breedName = breed.name;
-                const temperament = breed.temperament;
-                const lifespan = breed.life_span;
+                const imageUrl = `https://cdn2.thedogapi.com/images/${breed.reference_image_id}.jpg`;
 
-                breedInfoDiv.innerHTML = `
-                    <h2>${breedName}</h2>
-                    <p><strong>Temperament:</strong> ${temperament}</p>
-                    <p><strong>Lifespan:</strong> ${lifespan}</p>
-                    <!-- Add more information here as needed -->
+                const breedInfoHTML = `
+                    <div class="breed-info">
+                        <img src="${imageUrl}" alt="${breed.name}">
+                        <div>
+                            <h2>${breed.name}</h2>
+                            <p><strong>Temperament:</strong> ${breed.temperament}</p>
+                            <p><strong>Life Span:</strong> ${breed.life_span}</p>
+                            <p><strong>Bred For:</strong> ${breed.bred_for}</p>
+                            <p><strong>Breed Group:</strong> ${breed.breed_group}</p>
+                        </div>
+                    </div>
                 `;
+
+                breedInfoDiv.innerHTML = breedInfoHTML;
             } else {
-                breedInfoDiv.innerHTML = '<p>Breed not found.</p>';
+                breedInfoDiv.innerHTML = '<p>Breed not found. Please try again.</p>';
             }
         })
         .catch(error => {
             console.error('Error fetching breed info:', error);
             const breedInfoDiv = document.getElementById('breedInfo');
-            breedInfoDiv.innerHTML = '<p>Failed to retrieve breed information. Please try again later.</p>';
+            breedInfoDiv.innerHTML = '<p>Error fetching breed info. Please try again later.</p>';
         });
 }
