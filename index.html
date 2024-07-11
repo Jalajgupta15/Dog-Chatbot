@@ -7,12 +7,20 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="container">
+    <header>
+        <img src="dog_poster.jpg" alt="Dog Poster" class="poster">
         <h1>Dog Breed Information</h1>
-        <input type="text" id="breedNameInput" placeholder="Enter dog breed name...">
-        <button onclick="getBreedInfo()">Get Info</button>
+    </header>
+    <div class="container">
+        <div class="input-container">
+            <input type="text" id="breedNameInput" placeholder="Enter dog breed name...">
+            <button onclick="getBreedInfo()">Get Info</button>
+        </div>
         <div id="breedInfo"></div>
     </div>
+    <footer>
+        <p>&copy; 2024 Dog Lovers. All rights reserved.</p>
+    </footer>
     <script src="script.js"></script>
 </body>
 </html>
