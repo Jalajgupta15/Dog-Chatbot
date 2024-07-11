@@ -21,6 +21,13 @@ function getBreedInfo() {
                             <p><strong>Life Span:</strong> ${breed.life_span}</p>
                             <p><strong>Bred For:</strong> ${breed.bred_for}</p>
                             <p><strong>Breed Group:</strong> ${breed.breed_group}</p>
+                            <p><strong>Food Habits:</strong> High-quality dog food, avoid grains</p>
+                            <p><strong>Likes:</strong> Playing fetch, being with family</p>
+                            <p><strong>Dislikes:</strong> Being left alone, loud noises</p>
+                            <audio controls>
+                                <source src="dog_bark.mp3" type="audio/mpeg">
+                                Your browser does not support the audio element.
+                            </audio>
                         </div>
                     </div>
                 `;
